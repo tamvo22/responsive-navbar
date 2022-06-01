@@ -4,6 +4,9 @@
 
 The lack of space for menu items is a major challenge for websites with a large number of categories and menu items. In this example, we'll extend on our previous project [Next.js + MUI 5 Light/Dark Mode Theme + TypeScript example](https://github.com/tamvo22/mui-v5-theme) by adding a responsive multi-level menu Navbar and corresponding Hamburger menu to it.
 
+## CodeSandbox
+
+[![CodeSandbox Example](https://codesandbox.io/static/img/play-codesandbox.svg)]([https://codesandbox.io/s/github/tamvo22/mui-v5-theme](https://codesandbox.io/s/github/tamvo22/responsive-navbar))
 
 ## Objective
 
