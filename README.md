@@ -6,7 +6,7 @@ The lack of space for menu items is a major challenge for websites with a large 
 
 ## CodeSandbox
 
-[![CodeSandbox Example](https://codesandbox.io/static/img/play-codesandbox.svg)]([https://codesandbox.io/s/github/tamvo22/mui-v5-theme](https://codesandbox.io/s/github/tamvo22/responsive-navbar))
+[![CodeSandbox Example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/tamvo22/responsive-navbar)
 
 ## Objective
 
