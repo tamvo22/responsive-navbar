@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import ThemeToggler from '@/com/themes/ThemeToggler';
 import { Drawer, DrawerOffset, Box, IconButton, List, Link, ListItemIcon } from './styled';
 import { IconButtonProps } from '@mui/material/IconButton';
@@ -42,21 +42,21 @@ export const HamburgerDrawer = (props: Hamburger) => {
 
   const [subMenu, subMenuSet] = useState<string | null>(null);
 
-  function handleMenuOpenClick(event: React.MouseEvent<HTMLDivElement>, item: IMenuItem) {
+  const handleMenuOpenClick = useCallback((event: React.MouseEvent<HTMLDivElement>, item: IMenuItem) => {
     if (item.subMenu) {
       subMenuSet(item.id);
     } else {
       handleMenuClose();
     }
-  }
+  }, []);
+
+  const handleSubMenuClick = useCallback(() => {
+    handleMenuClose();
+    handleSubMenuClose();
+  }, []);
 
   function handleMenuClose() {
     setOpen(false);
-  }
-
-  function handleSubMenuClick() {
-    handleMenuClose();
-    handleSubMenuClose();
   }
 
   function handleSubMenuClose() {
@@ -70,7 +70,7 @@ export const HamburgerDrawer = (props: Hamburger) => {
         <ThemeToggler color={'light' as Color} />
         <List>
           {items.map((item) => (
-            <React.Fragment /* key={item.id} */>
+            <React.Fragment key={item.id}>
               <Link href={item.url}>
                 <ListItem disablePadding>
                   <ListItemButton onClick={(e) => handleMenuOpenClick(e, item)}>

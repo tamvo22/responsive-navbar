@@ -1,4 +1,4 @@
-import { useState, useEffect, createRef, useRef, useMemo } from 'react';
+import { useState, useEffect, useCallback, createRef, useRef, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import useResizeObserver from '@/utils/hooks/useResizeObserver';
 import withClientRender from '@/utils/hoc/withClientRender';
@@ -89,20 +89,22 @@ function Navbar({ items }: { items: IMenuItem[] }) {
     }
   }, [itemsRef?.current, menuWidth]);
 
-  function handleMenuOpenClick(event: React.MouseEvent<HTMLDivElement>, item: IMenuItem) {
+  const handleMenuOpenClick = useCallback((event: React.MouseEvent<HTMLDivElement>, item: IMenuItem) => {
     // disable link routing if item has subMenu
     if (item.subMenu) event.preventDefault();
 
     anchorElSet({ id: item.id, anchorEl: event?.currentTarget });
-  }
+  }, []);
+
+  const handleHiddenMoreClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+    hiddenAnchorElSet({ anchorEl: event?.currentTarget });
+  }, []);
+
   function handleMenuOpen(id: string) {
     if (anchorEl?.id === id) return anchorEl;
     else return undefined;
   }
 
-  function handleHiddenMoreClick(event: React.MouseEvent<HTMLButtonElement>) {
-    hiddenAnchorElSet({ anchorEl: event?.currentTarget });
-  }
   function handleHiddenMenuOpen() {
     if (hiddenAnchorEl?.anchorEl) return hiddenAnchorEl;
     else return undefined;

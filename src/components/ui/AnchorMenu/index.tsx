@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Menu, SubMenu, MenuItem, Link, ListItemText, ListItemIcon } from './styled';
 import { MenuProps } from '@mui/material/Menu';
 import Fade from '@mui/material/Fade';
@@ -18,12 +18,7 @@ const AnchorMenu = function (props: AchorMenu) {
 
   const [subAnchorEl, subAnchorElSet] = useState<AnchorEl | null>(null);
 
-  function closeMenu() {
-    subAnchorElSet(null);
-    anchorElSet(null);
-  }
-
-  function handleOnClick(event: React.MouseEvent<HTMLLIElement>, item: IMenuItem) {
+  const handleOnClick = useCallback((event: React.MouseEvent<HTMLLIElement>, item: IMenuItem) => {
     if (item.subMenu) {
       // disable link routing if item has subMenu and open subMenu
       event.preventDefault();
@@ -31,23 +26,28 @@ const AnchorMenu = function (props: AchorMenu) {
     } else {
       closeMenu();
     }
-  }
+  }, []);
+
+  const handleSubMenuOnClick = useCallback((event: React.MouseEvent<HTMLLIElement>) => {
+    // prevent sequential event from propagating
+    event.stopPropagation();
+    closeMenu();
+  }, []);
+
+  const closeSubMenu = useCallback((event: any) => {
+    // prevent sequential event from propagating
+    event.stopPropagation();
+    subAnchorElSet(null);
+  }, []);
 
   function handleMenuOpen(id: string) {
     if (subAnchorEl?.id === id) return subAnchorEl;
     else return undefined;
   }
 
-  function handleSubMenuOnClick(event: React.MouseEvent<HTMLLIElement>) {
-    // prevent sequential event from propagating
-    event.stopPropagation();
-    closeMenu();
-  }
-
-  function closeSubMenu(event: any) {
-    // prevent sequential event from propagating
-    event.stopPropagation();
+  function closeMenu() {
     subAnchorElSet(null);
+    anchorElSet(null);
   }
 
   return (
