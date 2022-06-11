@@ -7,7 +7,7 @@ export const Layout = styled(MuiContainer)`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: ${({ theme }) => theme.palette.background.default};
 `;
 
